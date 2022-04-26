@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Count To 30</title>
+	<style>
+    	
+        .centered { text-align: center; }
+      
+		.button {
+ 			transition-duration: 0.4s;
+		}
+
+		.button:hover {
+		  background-color: #000000; /* Green */
+		  color: white; 
+		}
+		
+		.button1{
+			height : 50px;
+			width : 200px;
+			margin-left: 100px;
+		}
+		
+		.button2{
+			height: 30px;
+			width: 198px;
+		}
+		
+		.button3{
+			width:220px;
+		}
+		
+		.button4{
+			width:80px;
+			height: 100px;
+		}
+		
+		.button5{
+			width:270px;
+		}
+		
+        body { 
+			margin-top: 200px;
+			margin-left: 500px;
+			font-family: "Times New Roman", Times, serif;
+        	border: 1px solid gray; width: 400px; padding: 5px;
+        }
+        
+		
+		table, th, td {
+			border: 1px solid black;
+		}
+		
+        .red { background-color: red; }
+        .green { background-color: green; }
+        .blue { background-color: blue; }
+        .yellow { background-color: yellow; }
+        .purple { background-color: purple; }
+        .violet { background-color: violet; }
+        .brown { background-color: brown; }
+        .orange { background-color: orange; }
+		
+        .avatar { width: 63px; height: 100px; }
+        #playerNameInput { width: 382px; padding: 5px; font-size: 20px; }
+        #matchPage { display: none; }
+		#chooseModePage{ display: none; }
+		#chooseBotModePage{ display: none; }
+		#multiplayerPage{ display: none;}
+		#impossibleModePage{ display : none; }
+		#mediumModePage{ display: none; }		
+		
+        #startBtn { display: none; }
+		
+		
+    </style>
+</head>
+<body>
+
+	<div id = "mainPage"> 
+		<h1 class = "centered"> Count To 30 </h1>
+		<p> The ultimate Goal in this Game is to be the first one to get to number 30. Two player will start with number 0. In each turn, each player will add 1, 2 
+		or 3 to the number
+		</p>
+		<button type="button" class="button button1" onclick = "chooseGameModePage()"> Play Game </button>
+	</div>
+	
+	<div id = "chooseModePage">
+		<h1 class = "centered"> Count To 30 </h1>
+		<div class = "centered"> Choose your game mode !!!</div>
+		<br>
+		<button type="button" class= "button button2" onclick = "chooseBotModePage()"> Against Bot Mode </button>
+		<button type="button" class= "button button2" onclick = "multiplayerGamePage()"> Multiplayer Mode</button>
+	</div>
+	
+
+	<div id = "chooseBotModePage">
+		<h1 class = "centered"> Count To 30 </h1>
+		<div class = "centered"> Choose the bot mode !!!</div>
+		<br>
+		<button type="button" class= "button button2" onclick = "impossibleModePage()"> Impossible Mode </button>
+		<button type="button" class= "button button2" onclick = "mediumModePage()"> Medium Mode </button>
+	</div>
+	
+
+	<div id = "multiplayerPage">
+		<h1 class = "centered"> Count To 30</h1>
+		<table class = "centered" width =  "400px">
+			<tr> 
+				<th> Player 1: <span id="playerOnePoint"></span> </th>
+				<th> Player <span id="turnMulMode"></span>'s turn</th>
+				<th> Player 2: <span id="playerTwoPoint"></span></th>
+			</tr>
+			<tr>
+				<td rowspan="4"> <button type="button" class= "button4" onclick = "restartMulMode()"> Restart </button></td>
+				<td class = "centered"> <span id = "numberMulMode"></span></td>
+				<td rowspan="4"> <button type="button" class= "button4" onclick = "backMulMode()"> Back </button></td>
+			</tr>
+			<tr>
+				<td> <button type="button" class ="button3" onclick = "addOneMulMode()"> + 1</button></td>
+			</tr>
+			<tr>
+				<td> <button type="button" class ="button3" onclick = "addTwoMulMode()"> + 2</button></td>
+			</tr>
+			<tr>
+				<td> <button type="button" class ="button3" onclick = "addThreeMulMode()"> + 3</button></td>
+			</tr>
+		</table>
+	</div>
+	
+	<div id = "impossibleModePage">
+		<h1 class = "centered"> Count To 30</h1>
+		<table class = "centered" width =  "400px" >
+			<tr> 
+				<th> Player  :  <span id="playerImpModePoint"></span> </th>
+				<th> <span id="turnImpMode"></span>'s turn</th>
+				<th> AI      :  <span id="AIImpModePoint"></span></th>
+			</tr> 
+			<tr>
+				<td rowspan="4"> <button type="button" class= "button4" onclick = "restartImpMode()"> Restart </button></td>
+				<td class = "centered"> <span id = "numberImpMode"></span></td>
+				<td rowspan="4"><button type="button" class= "button4" onclick = "backImpMode()"> Back </button></td>
+			</tr>
+			<tr>
+				<td> <button type="button" class ="button3" onclick = "addOneImpMode()"> + 1</button></td>
+			</tr>
+			<tr>
+				<td> <button type="button" class ="button3" onclick = "addTwoImpMode()"> + 2</button></td>
+			</tr>
+			<tr>
+				<td> <button type="button" class ="button3" onclick = "addThreeImpMode()"> + 3</button></td>
+			</tr>
+		</table>
+	</div>
+	
+	
+	<div id = "mediumModePage">
+		<h1 class = "centered"> Count To 30</h1>
+		<table class = "centered" width =  "400px">
+			<tr> 
+				<th> Player  :  <span id="playerMedModePoint"></span> </th>
+				<th> <span id="turnMedMode"></span>'s turn</th>
+				<th> AI      :  <span id="AIMedModePoint"></span></th>
+			</tr> 
+			<tr>
+				<td rowspan="4"> <button type="button" class= "button4" onclick = "restartMedMode()"> Restart </button></td>
+				<td class = "centered"> <span id = "numberMedMode"></span></td>
+				<td rowspan="4"> <button type="button" class= "button4" onclick = "backMedMode()"> Back </button></td>
+			</tr>
+			<tr>
+				<td> <button type="button" class ="button3" onclick = "addOneMedMode()"> + 1</button></td>
+			</tr>
+			<tr>
+				<td> <button type="button" class ="button3" onclick = "addTwoMedMode()"> + 2</button></td>
+			</tr>
+			<tr>
+				<td> <button type="button" class ="button3" onclick = "addThreeMedMode()"> + 3</button></td>
+			</tr>
+		</table>
+	</div>
+	
+<script>
+	//Multiplayer Mode
+	var player1 = 0;
+	document.getElementById("playerOnePoint").innerHTML = player1.toString();
+	var player2 = 0;
+	document.getElementById("playerTwoPoint").innerHTML = player2.toString();
+	var turnMul = 1;
+	document.getElementById("turnMulMode").innerHTML = turnMul.toString();
+	var numMul = 0;
+	document.getElementById("numberMulMode").innerHTML = numMul.toString();
+	
+	//Impossible Mode
+	var playerImp = 0;
+	document.getElementById("playerImpModePoint").innerHTML = playerImp.toString();
+	var AIImp = 0;
+	document.getElementById("AIImpModePoint").innerHTML = AIImp.toString();
+	var turnIdImp = 1;
+	var turnImp = 'AI'; 
+	document.getElementById("turnImpMode").innerHTML = turnImp;
+	var numImp = 0;
+	document.getElementById("numberImpMode").innerHTML = numImp.toString();
+	
+	//Medium Mode
+	var playerMed = 0;
+	document.getElementById("playerMedModePoint").innerHTML = playerMed.toString();
+	var AIMed = 0;
+	document.getElementById("AIMedModePoint").innerHTML = AIMed.toString();
+	var turnIdMed = 1;
+	var turnMed = "Player"; 
+	document.getElementById("turnMedMode").innerHTML = turnMed;
+	var numMed = 0;
+	document.getElementById("numberMedMode").innerHTML = numMed.toString();
+	
+	//Turn in Impossible Mode 1 = Player, 2 = AI then update in the GUI
+	function ImpTurn(){
+		if (turnIdImp == 1){
+			turnImp = 'AI';
+			document.getElementById("turnImpMode").innerHTML = turnImp;
+		}
+		else{
+			turnImp = 'Player';
+			document.getElementById("turnImpMode").innerHTML = turnImp;
+		}
+	}
+	
+	
+	//Turn in Medium Mode 1 = Player, 2 = AI then update in the GUI
+	function MedTurn(){
+		if (turnIdMed == 1){
+			turnMed = 'Player';
+			document.getElementById("turnMedMode").innerHTML = turnMed;
+		}
+		else{
+			turnMed = 'AI';
+			document.getElementById("turnMedMode").innerHTML = turnMed;
+		}
+	}
+	
+	//change turn 
+	function changeTurnMulMode(){
+		if (turnMul == 1){
+			turnMul = 2;
+		}
+		else{
+			turnMul = 1;
+		}
+	}
+	
+	function changeTurnMedMode(){
+		if (turnIdMed == 1){
+			turnIdMed = 2;
+			turnMed = "AI";
+			document.getElementById("turnMedMode").innerHTML = turnMed;
+		}
+		else{
+			turnIdMed = 1;
+			turnMed = "Player";
+			document.getElementById("turnMedMode").innerHTML = turnMed;
+		}
+	}
+	
+	function changeTurnImpMode(){
+		if (turnIdImp == 1){
+			turnIdImp = 2;
+			turnImp = "Player";
+			document.getElementById("turnImpMode").innerHTML = turnImp;
+		}
+		else{
+			turnIdImp = 1;
+			turnImp = "AI";
+			document.getElementById("turnImpMode").innerHTML = turnImp;
+		}
+	}
+	
+	// adding 1, 2, or 3 to the number in multiplayer Mode
+	
+	function addOneMulMode(){
+		numMul = numMul + 1;
+		document.getElementById("numberMulMode").innerHTML = numMul.toString();
+		if (numMul >= 30){
+			if (turnMul == 1){
+				player1 = player1 +1;
+				document.getElementById("playerOnePoint").innerHTML = player1.toString();
+				setTimeout(function(){ 
+					alert("Player 1 WIN !!!");
+				}, 500);
+			}
+			else {
+				player2 = player2 +1;
+				document.getElementById("playerTwoPoint").innerHTML  = player2.toString();
+				setTimeout(function(){ 
+					alert("Player 2 WIN !!!");
+				}, 500);
+			}
+		}
+		else{
+			changeTurnMulMode();
+			document.getElementById("turnMulMode").innerHTML = turnMul.toString();
+		}
+	}
+	
+	
+	function addTwoMulMode(){
+		numMul = numMul + 2;
+		document.getElementById("numberMulMode").innerHTML = numMul.toString();
+		if (numMul >= 30){
+			if (turnMul == 1){
+				player1 = player1 +1;
+				document.getElementById("playerOnePoint").innerHTML = player1.toString();
+				setTimeout(function(){ 
+					alert("Player 1 WIN !!!");
+				}, 500);
+			}
+			else {
+				player2 = player2 +1;
+				document.getElementById("playerTwoPoint").innerHTML  = player2.toString();
+				setTimeout(function(){ 
+					alert("Player 2 WIN !!!");
+				}, 500);
+			}
+		}
+		else{
+			changeTurnMulMode();
+			document.getElementById("turnMulMode").innerHTML = turnMul.toString();
+		}
+	}
+	
+	function addThreeMulMode(){
+		numMul = numMul + 3;
+		document.getElementById("numberMulMode").innerHTML = numMul.toString();
+		if (numMul >= 30){
+			if (turnMul == 1){
+				player1 = player1 +1;
+				document.getElementById("playerOnePoint").innerHTML = player1.toString();
+				setTimeout(function(){ 
+					alert("Player 1 WIN !!!");
+				}, 1000);
+			}
+			else {
+				player2 = player2 +1;
+				document.getElementById("playerTwoPoint").innerHTML  = player2.toString();
+				setTimeout(function(){ 
+					alert("Player 2 WIN !!!");
+				}, 1000);
+			}
+		}
+		else{
+			changeTurnMulMode();
+			document.getElementById("turnMulMode").innerHTML = turnMul.toString();
+		}
+	}
+	
+	
+	
+	
+	
+	// adding 1, 2 or 3 to the number  in Impossible Mode
+	function addOneImpMode(){
+		numImp = numImp + 1;
+		document.getElementById("numberImpMode").innerHTML = numImp.toString();
+		if(numImp >= 30){
+			playerImp =  playerImp + 1;
+			document.getElementById("playerImpModePoint").innerHTML = playerImp.toString();
+			alert("Player Win !!!");
+		}
+		else{
+			changeTurnImpMode();
+			setTimeout(function(){ 
+				AIImpTurn();
+				document.getElementById("numberImpMode").innerHTML = numImp.toString();
+				if(numImp >= 30){
+					setTimeout(function(){ 
+					alert("AI Win !!!");
+					}, 500);
+					AIImp = AIImp + 1;
+					document.getElementById("AIImpModePoint").innerHTML = AIImp.toString();
+				}
+				else{
+					setTimeout(function(){ 
+					changeTurnImpMode();
+					}, 1000);
+				}
+			}, 2000);
+		}
+	}
+	
+	function addTwoImpMode(){
+		numImp = numImp + 2;
+		document.getElementById("numberImpMode").innerHTML = numImp.toString();
+		if(numImp >= 30){
+			playerImp =  playerImp + 1;
+			document.getElementById("playerImpModePoint").innerHTML = playerImp.toString();
+			alert("Player Win !!!");
+		}
+		else{
+			changeTurnImpMode();
+			setTimeout(function(){ 
+				AIImpTurn();
+				document.getElementById("numberImpMode").innerHTML = numImp.toString();
+				if(numImp >= 30){
+					setTimeout(function(){ 
+					alert("AI Win !!!");
+					}, 500);
+					AIImp = AIImp + 1;
+					document.getElementById("AIImpModePoint").innerHTML = AIImp.toString();
+				}
+				else{
+					setTimeout(function(){ 
+					changeTurnImpMode();
+					}, 1000);
+				}
+			}, 2000);
+		}
+	}
+	
+	function addThreeImpMode(){
+		numImp = numImp + 3;
+		document.getElementById("numberImpMode").innerHTML = numImp.toString();
+		if(numImp >= 30){
+			playerImp =  playerImp + 1;
+			document.getElementById("playerImpModePoint").innerHTML = playerImp.toString();
+			alert("Player Win !!!");
+		}
+		else{
+			changeTurnImpMode();
+			setTimeout(function(){ 
+				AIImpTurn();
+				document.getElementById("numberImpMode").innerHTML = numImp.toString();
+				if(numImp >= 30){
+					setTimeout(function(){ 
+					alert("AI Win !!!");
+					}, 500);
+					AIImp = AIImp + 1;
+					document.getElementById("AIImpModePoint").innerHTML = AIImp.toString();
+				}
+				else{
+					setTimeout(function(){ 
+					changeTurnImpMode();
+					}, 1000);
+				}
+			}, 2000);
+		}
+	}
+	
+	
+	// Adding 1, 2, or 3 to the number in Medium Mode
+	function addOneMedMode(){
+		numMed = numMed + 1;
+		document.getElementById("numberMedMode").innerHTML = numMed.toString();
+		if(numMed >= 30){
+			playerMed =  playerMed + 1;
+			document.getElementById("playerMedModePoint").innerHTML = playerMed.toString();
+			setTimeout(function(){ 
+				alert("Player Win !!!");
+			}, 500);
+		}
+		else{
+			changeTurnMedMode();
+			setTimeout(function(){ 
+				AIMedTurn();
+				document.getElementById("numberMedMode").innerHTML = numMed.toString();
+				if(numMed >= 30){
+					setTimeout(function(){ 
+					alert("AI Win !!!");
+					}, 500);
+					AIMed = AIMed + 1;
+					document.getElementById("AIMedModePoint").innerHTML = AIMed.toString();
+				}
+				else{
+					setTimeout(function(){ 
+					changeTurnMedMode();
+					}, 1000);
+				}
+			}, 2000);
+		}
+	}
+	
+	function addTwoMedMode(){
+		numMed = numMed + 2;
+		document.getElementById("numberMedMode").innerHTML = numMed.toString();
+		if(numMed >= 30){
+			playerMed =  playerMed + 1;
+			document.getElementById("playerMedModePoint").innerHTML = playerMed.toString();
+			setTimeout(function(){ 
+				alert("Player Win !!!");
+			}, 500);
+		}
+		else{
+			changeTurnMedMode();
+			setTimeout(function(){ 
+				AIMedTurn();
+				document.getElementById("numberMedMode").innerHTML = numMed.toString();
+				if(numMed >= 30){
+					setTimeout(function(){ 
+					alert("AI Win !!!");
+					}, 500);
+					AIMed = AIMed + 1;
+					document.getElementById("AIMedModePoint").innerHTML = AIMed.toString();
+				}
+				else{
+					setTimeout(function(){ 
+					changeTurnMedMode();
+					}, 1000);
+				}
+			}, 2000);
+		}
+	}
+	
+	function addThreeMedMode(){
+		numMed = numMed + 3;
+		document.getElementById("numberMedMode").innerHTML = numMed.toString();
+		if(numMed >= 30){
+			playerMed =  playerMed + 1;
+			document.getElementById("playerMedModePoint").innerHTML = playerMed.toString();
+			setTimeout(function(){ 
+				alert("Player Win !!!");
+			}, 500);
+		}
+		else{
+			changeTurnMedMode();
+			setTimeout(function(){ 
+				AIMedTurn();
+				document.getElementById("numberMedMode").innerHTML = numMed.toString();
+				if(numMed >= 30){
+					setTimeout(function(){ 
+					alert("AI Win !!!");
+					}, 500);
+					AIMed = AIMed + 1;
+					document.getElementById("AIMedModePoint").innerHTML = AIMed.toString();
+				}
+				else{
+					setTimeout(function(){ 
+					changeTurnMedMode();
+					}, 1000);
+				}
+			}, 2000);
+		}
+	}
+
+	// AI Decide what to add in impossible Mode;
+	function AIImpTurn(){
+		if (numImp % 4 == 0){
+			numImp = numImp +2;
+		}
+		else if (numImp % 4 == 1) {
+			numImp = numImp + 1;
+		}
+		else if (numImp % 4 == 2){
+			numImp = numImp +getRndInteger(2, 4);
+		}
+		else{
+			numImp = numImp + 3;
+		}
+	}
+	
+	
+	function AIMedTurn(){
+		if (numMed % 4 == 0){
+			numMed = numMed +2;
+		}
+		else if (numMed % 4 == 1) {
+			numMed = numMed + 1;
+		}
+		else if (numMed % 4 == 2){
+			numMed = numMed + getRndInteger(2, 4);
+		}
+		else{
+			numMed = numMed + 3;
+		}
+	}
+	
+	
+	function chooseGameModePage(){
+		document.getElementById("mainPage").style.display = "none";
+		document.getElementById("chooseModePage").style.display = "inline";
+	}
+	
+	function chooseBotModePage(){
+		document.getElementById("chooseModePage").style.display = "none";
+		document.getElementById("chooseBotModePage").style.display = "inline";
+	}
+	
+	function multiplayerGamePage(){
+		document.getElementById("chooseModePage").style.display = "none";
+		document.getElementById("multiplayerPage").style.display = "inline";
+	}
+	
+	function impossibleModePage(){
+		document.getElementById("chooseBotModePage").style.display = "none";
+		document.getElementById("impossibleModePage").style.display = "inline";
+		turnIdImp = 1;
+		turnImp = 'AI'; 
+		document.getElementById("turnImpMode").innerHTML = turnImp;
+		numImp = 0;
+		document.getElementById("numberImpMode").innerHTML = numImp.toString();
+		setTimeout(function(){ 
+			AIImpTurn();
+			document.getElementById("numberImpMode").innerHTML = numImp.toString();
+			setTimeout(function(){ 
+				changeTurnImpMode();
+			}, 1000);
+		}, 2000);
+	}
+	
+	function mediumModePage(){
+		document.getElementById("chooseBotModePage").style.display = "none";
+		document.getElementById("mediumModePage").style.display = "inline";
+	}
+	
+	
+	//restart the game for each mode 
+	function restartMulMode(){
+		numMul = 0;
+		document.getElementById("numberMulMode").innerHTML = numMul.toString();
+		turnMul = 1;
+		document.getElementById("turnMulMode").innerHTML = turnMul.toString();
+	}
+	
+	function restartMedMode(){
+		turnIdMed = 1;
+		turnMed = "Player"; 
+		document.getElementById("turnMedMode").innerHTML = turnMed;
+		numMed = 0;
+		document.getElementById("numberMedMode").innerHTML = numMed.toString();
+	}
+	
+	function restartImpMode(){
+		turnIdImp = 1;
+		turnImp = 'AI'; 
+		document.getElementById("turnImpMode").innerHTML = turnImp;
+		numImp = 0;
+		document.getElementById("numberImpMode").innerHTML = numImp.toString();
+		setTimeout(function(){ 
+			AIImpTurn();
+			document.getElementById("numberImpMode").innerHTML = numImp.toString();
+			setTimeout(function(){ 
+				changeTurnImpMode();
+			}, 1000);
+		}, 2000);
+	}
+	
+	// Game Mode choose Page
+	function backMulMode(){
+		restartMulMode();
+		document.getElementById("multiplayerPage").style.display = "none";
+		document.getElementById("chooseModePage").style.display = "inline";
+		
+	}
+	
+	function backImpMode(){
+		document.getElementById("impossibleModePage").style.display = "none";
+		document.getElementById("chooseModePage").style.display = "inline";	
+	}
+	
+	function backMedMode(){
+		restartMedMode();
+		document.getElementById("mediumModePage").style.display = "none";
+		document.getElementById("chooseModePage").style.display = "inline";	
+	}
+	
+	// get the random number in the given specific range
+	function getRndInteger(min, max) {
+  		return Math.floor(Math.random() * (max - min)) + min;
+	}
+</script>
+	
+	
+	
+	
+</body>
+</html>
